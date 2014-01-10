@@ -1,9 +1,26 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/webview_detail"
-    style="?android:attr/textAppearanceLarge"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:weightSum="10"
+    android:orientation="vertical"
+    >
+<TextView
+    android:id="@+id/webview_detail"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:padding="6dp"
     android:textIsSelectable="true"
-    tools:context="it.opencontent.android.opentagger.WebviewDetailFragment" />
+    tools:context="it.opencontent.android.opentagger.WebviewDetailFragment"
+    android:layout_width="match_parent" />
+
+<WebView
+    android:layout_weight="9"
+    android:id="@+id/webview_webview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+</WebView>
+</LinearLayout>

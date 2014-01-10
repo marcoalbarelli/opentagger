@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 
 /**
@@ -16,6 +17,8 @@ import android.view.MenuItem;
  * more than a {@link WebviewDetailFragment}.
  */
 public class WebviewDetailActivity extends FragmentActivity {
+
+    private WebviewDetailFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +43,10 @@ public class WebviewDetailActivity extends FragmentActivity {
             Bundle arguments = new Bundle();
             arguments.putString(WebviewDetailFragment.ARG_ITEM_ID,
                     getIntent().getStringExtra(WebviewDetailFragment.ARG_ITEM_ID));
-            WebviewDetailFragment fragment = new WebviewDetailFragment();
-            fragment.setArguments(arguments);
+            mFragment = new WebviewDetailFragment();
+            mFragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.webview_detail_container, fragment)
+                    .add(R.id.webview_detail_container, mFragment)
                     .commit();
         }
     }
@@ -63,5 +66,18 @@ public class WebviewDetailActivity extends FragmentActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        // Check if the key event was the Back button and if there's history
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mFragment != null) {
+            mFragment.goBack();
+            return true;
+        }
+        // If it wasn't the Back key or there's no web page history, bubble up to the default
+        // system behavior (probably exit the activity)
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -25,9 +25,9 @@ public class DummyContent {
 
     static {
         // Add 3 sample items.
-        addItem(new DummyItem("1", "Item 1"));
-        addItem(new DummyItem("2", "Item 2"));
-        addItem(new DummyItem("3", "Item 3"));
+        addItem(new DummyItem("1", "google", "http://www.google.com"));
+        addItem(new DummyItem("2", "opentagger", "http://opentagger.opencontent.it"));
+        addItem(new DummyItem("3", "ez publish", "http://ez.no"));
     }
 
     private static void addItem(DummyItem item) {
@@ -41,10 +41,12 @@ public class DummyContent {
     public static class DummyItem {
         public String id;
         public String content;
+        public String uri;
 
-        public DummyItem(String id, String content) {
+        public DummyItem(String id, String content, String uri) {
             this.id = id;
             this.content = content;
+            this.uri = uri;
         }
 
         @Override
